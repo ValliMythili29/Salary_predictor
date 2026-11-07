@@ -11,20 +11,20 @@ async function predictSalary() {
     }
 
     // Send request to backend
-    const response = await fetch(
-        "http://127.0.0.1:8000/predict",
-        {
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                experience: Number(experience)
-            })
-        }
-    );
+ 
+const response = await fetch(
+    "https://https://salary-predictor-x9al.onrender.com.onrender.com/predict",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            experience: Number(experience)
+        })
+    }
+);
+    ;
 
     // Receive backend response
     const data = await response.json();
