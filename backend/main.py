@@ -1,22 +1,26 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
+
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
 # Create FastAPI application
 app = FastAPI()
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://127.0.0.1:5500",
-        "http://localhost:5500"
+        "http://localhost:5500",
+        "https://salarypredictor-frontend.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Load the saved ML model
 model_path = Path(__file__).parent / "model.pkl"
