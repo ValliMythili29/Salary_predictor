@@ -1,35 +1,50 @@
-console.log("JavaScript loaded successfully!");
+
 async function predictSalary() {
+
     console.log("Predict button clicked!");
-    // Get input value
+
     const experience = document.getElementById("experience").value;
+    const result = document.getElementById("result");
 
     if (experience === "" || Number(experience) < 0) {
-        document.getElementById("result").innerText =
-            "Enter a valid experience!";
+        result.innerText = "Enter valid experience!";
         return;
     }
 
-    // Send request to backend
+    result.innerText = "Predicting...";
 
-    const response = await fetch(
-        "https://https://salary-predictor-x9al.onrender.com.onrender.com/predict",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                experience: Number(experience)
-            })
+    try {
+
+        const response = await fetch(
+            "https://salary-predictor-x9al.onrender.com/predict",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    experience: Number(experience)
+                })
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("HTTP Error: " + response.status);
         }
-    );
-    ;
 
-    // Receive backend response
-    const data = await response.json();
+        const data = await response.json();
 
-    // Display prediction
-    document.getElementById("result").innerText =
-        "Predicted Salary: ₹" + data.predicted_salary;
+        result.innerText =
+            "Predicted Salary: ₹" + data.predicted_salary;
+
+    }
+    catch (error) {
+
+        console.error("Prediction error:", error);
+
+        result.innerText =
+            "Something went wrong: " + error.message;
+    }
 }
