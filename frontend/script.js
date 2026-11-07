@@ -1,6 +1,6 @@
-
+console.log("JavaScript loaded successfully!");
 async function predictSalary() {
-
+    console.log("Predict button clicked!");
     // Get input value
     const experience = document.getElementById("experience").value;
 
@@ -11,19 +11,19 @@ async function predictSalary() {
     }
 
     // Send request to backend
- 
-const response = await fetch(
-    "https://https://salary-predictor-x9al.onrender.com.onrender.com/predict",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            experience: Number(experience)
-        })
-    }
-);
+
+    const response = await fetch(
+        "https://https://salary-predictor-x9al.onrender.com.onrender.com/predict",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                experience: Number(experience)
+            })
+        }
+    );
     ;
 
     // Receive backend response
